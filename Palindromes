@@ -1,0 +1,44 @@
+package com.ai.javalab;
+import java.lang.String;
+import java.util.Scanner;
+
+public class CheckingForPallindromes {
+
+	public static void main(String[] args) {
+
+			System.out.println("Type the phrase to be reversed: ");
+			Scanner keyboard = new Scanner(System.in);
+			String word = keyboard.nextLine();
+			int charNumber = word.length();
+			String justLetters = "";
+			String reversedWord = "";
+			for( int number = 0; number<=charNumber-1; number++){
+				char letter = word.charAt(number);
+				if(Character.isLetter(letter)){
+				justLetters = justLetters+letter;
+				}
+			}
+			for( int number = charNumber-1; number>=0; number--){
+			char letter = word.charAt(number);
+			if(Character.isLetter(letter)){
+			reversedWord = reversedWord+letter;
+			}
+			}
+			if (reversedWord.equalsIgnoreCase(justLetters)){
+				System.out.println("Palindrome detected!");
+			}
+			else{
+				System.out.println("No palindrome detetced!");
+				System.out.println("Reveresed phrase is: "+reversedWord);
+			}
+			
+			keyboard.close();
+			
+		}
+		
+	}
+			
+			
+	
+
+
