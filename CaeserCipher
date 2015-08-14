@@ -1,0 +1,60 @@
+package com.ai.javalab;
+
+
+public class CaeserCipher {
+	public static String encode (String plainText, int key){ 
+
+	char [] charArray = plainText.toCharArray();
+
+	for( int number = 0; number< charArray.length; number++){
+		
+		char letter = charArray[number];
+		if(Character.isLetter(letter)){
+		letter = (char)(letter - key);
+		
+		if (letter< 'a'){
+			letter = (char)(letter+26);
+		
+		}
+		
+		charArray[number] = letter;
+		}
+	}
+	String encoded = new String(charArray);
+	System.out.println(encoded);
+
+	return encoded;
+
+}
+
+	public static String decode (String plainText, int key){ 
+
+		char [] charArray = plainText.toCharArray();
+
+		for( int number = 0; number< charArray.length; number++){
+			
+			char letter = charArray[number];
+			if(Character.isLetter(letter)){
+			letter = (char)(letter + key);
+			
+			if (letter > 'z'){
+				letter = (char)(letter - 26);
+			
+			}
+			
+			charArray[number] = letter;
+			}
+		}
+		String decoded = new String(charArray);
+		System.out.println(decoded);
+
+		return decoded;
+
+	}
+
+	public static void main(String[] args) {
+		
+		encode("the test",3);
+		decode("qeb qbpq", 3);
+	}
+}
