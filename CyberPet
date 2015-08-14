@@ -1,0 +1,132 @@
+import static java.lang.System.out;
+
+import java.util.Scanner;
+
+public class CyberPet {
+	
+
+	public static void main(String[] args) {
+		Dog myDog = new Dog();
+		myDog.setAliveDead("alive");
+		Scanner keyboard = new Scanner(System.in);
+		out.print("What is your dog's name?");
+		String name = keyboard.nextLine();
+		myDog.setName(name);
+		int loopCounter = 0;
+		char reply;
+
+		while ((myDog.getAliveDead()).equals("alive")){
+			
+			loopCounter++;
+			if(loopCounter%10==0){
+				myDog.sleep();
+				try{
+					Thread.sleep(8000);
+				}
+				catch(InterruptedException ex) {
+				    Thread.currentThread().interrupt();
+				}
+				out.println("I'm awake");
+				continue;
+			}
+		
+	do{ 
+		out.print("Feed your dog? (y/n) ");
+		reply = 
+				keyboard.findWithinHorizon(".", 0).charAt(0);
+	} while (reply != 'y' && reply != 'n');
+
+	if (reply == 'y') {
+		myDog.eat();
+		myDog.bark();
+		if(myDog.health < 10){
+			myDog.health += 1;
+			out.println("Health is now:"+myDog.health);
+		}
+	
+	}
+	else{
+		if(myDog.health==0){
+			myDog.setAliveDead("dead");
+			out.println(myDog.getName()+" is "+myDog.getAliveDead());
+			System.exit(0);
+		}
+		else if(myDog.health <=10){
+			myDog.health -= 1;
+		out.println("owww but I'm hungry");
+		
+	}
+	}
+		
+	do{
+			out.print("Play with your dog? (y/n) ");
+			reply = 
+					keyboard.findWithinHorizon(".", 0).charAt(0);
+		} while (reply != 'y' && reply != 'n');
+
+		if (reply == 'y') {
+			myDog.play();
+			myDog.bark();
+			if(myDog.health < 10){
+				myDog.health += 1;
+				out.println("Health is now:"+myDog.health);
+			}
+		
+		}
+		else{ 
+			if(myDog.health==0){
+				myDog.setAliveDead("dead");
+				out.println(myDog.getName()+" is " +myDog.getAliveDead());
+				System.exit(0);
+				}
+			else if(myDog.health <=10){
+				
+			out.println("owww but I want to play fetch");
+			
+		}
+		}
+		do{ 
+			out.print("Walk your dog? (y/n) ");
+			reply = 
+					keyboard.findWithinHorizon(".", 0).charAt(0);
+		} while (reply != 'y' && reply != 'n');
+
+		if (reply == 'y') {
+			myDog.walk();
+			myDog.bark();
+			if(myDog.health < 10){
+				myDog.health += 1;
+				out.println("Health is now:"+myDog.health);
+			}
+		
+		}
+		else{
+			if(myDog.health==0){
+				myDog.setAliveDead("dead");
+				out.println(myDog.getName()+" is "+myDog.getAliveDead());
+				System.exit(0);
+			}
+			else if(myDog.health <=10){
+				myDog.health -= 1;
+			out.println("owww");
+			
+		}
+			
+		}
+		
+
+		}
+		
+	
+		
+	keyboard.close();
+
+	 
+	 
+	}
+	 
+	
+	 }
+	
+
+
