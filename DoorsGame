@@ -1,0 +1,206 @@
+package doorsGame;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Random;
+import static java.lang.System.out;
+
+public class DoorsGame {
+
+	public static void main(String[] args) {
+
+
+
+
+			
+	//assign prizes
+		String player = "";
+		int goatDoor = 0;
+		int doorNumber =0;
+		int newDoorNumber = 0;
+			 ArrayList<Integer> prizes = new ArrayList<Integer>();
+
+		     for (int n = 0; n <= 2; ++n)
+		     {
+		        prizes.add(n);
+		     }
+		     
+		    Collections.shuffle(prizes);
+				 
+
+		Integer [] prize = new Integer [3];
+		prize=prizes.toArray(prize);
+			
+		String[] door = new String[3];
+			
+			for (int n = 0; n<=2; n++){
+				switch (prize[n]){
+				case 0:
+					door[n]="Goat";	
+					break;
+				
+				case 1:	
+					door[n] ="Goat";
+					break;
+				
+				case 2:
+					door[n] = "Car";
+					break;
+				
+				}
+			}
+			System.out.println("The prizes are "+Arrays.toString(door));
+		
+	//choose player	
+		Scanner keyboard = new Scanner(System.in);	
+		char response;
+			do{
+				out.println("Choose and option: ");
+				out.println("a) computer player who sticks, b) you play, ");
+				out.println("c) computer player who switches, d)computer player random");
+				response = 
+						keyboard.findWithinHorizon(".", 0).charAt(0);
+			} while (response != 'a' && response!= 'b'&& response!='c' && response!='d');
+			
+//computer chooses door			
+			if (response == 'a') {
+				player = "ComputerStick";
+				doorNumber = new Random().nextInt(3)+1;		
+				out.println("Computer picked door "+doorNumber);
+			}
+			
+// Player chooses door		
+			else if (response =='b')	{	
+				player = "Person";
+			System.out.println("Please choose door 1, 2 or 3");
+			doorNumber = keyboard.nextInt();
+			out.println("You chose door: "+doorNumber);}
+			
+			else if (response =='c'){
+				player = "ComputerSwitch";
+				doorNumber = new Random().nextInt(3)+1;		
+				out.println("Computer picked door "+doorNumber);
+				
+			}
+			else{
+				player = "ComputerRandom";
+				doorNumber = new Random().nextInt(3)+1;		
+				out.println("Computer picked door "+doorNumber);
+			}
+			
+			for(int i=0; i<=2; i++){
+				if(door[i].equals("Goat") && doorNumber!= i+1) {
+					goatDoor = i+1;	
+					System.out.println("But there's a goat behind door "+goatDoor);
+					break;
+					}
+				
+			}
+	//door switch & prize reveal		
+			char reply;
+			if (player.equals("Person") ){
+			do{ 
+				out.print("Would you like to change your door choice? (y/n) ");
+				
+				reply = keyboard.findWithinHorizon(".", 0).charAt(0);
+			} while (reply != 'y' && reply != 'n');
+			
+			if (reply == 'y') {
+				out.println("Okay, which door would you like now?");
+				newDoorNumber = keyboard.nextInt();
+				System.out.println("You have changed to door "+newDoorNumber);
+				switch (newDoorNumber) {
+				case 1:
+					System.out.println("You won a "+door[0]);
+					break;
+				case 2:
+					System.out.println("You won a "+door[1]);
+					break;
+				case 3:
+					System.out.println("You won a "+door[2]);
+					break;
+				}
+			}
+			else{
+				out.println("Ok you're sticking with your first choice, let's see what you won");
+			switch (doorNumber) {
+			case 1:
+				System.out.println("You won a "+door[0]);
+				break;
+			case 2:
+				System.out.println("You won a "+door[1]);
+				break;
+			case 3:
+				System.out.println("You won a "+door[2]);
+				break;
+				
+			}
+			}
+			
+		}
+			if (player.equals("ComputerStick")){
+				out.println("I'll stick with my choice");
+				switch (doorNumber) {
+				case 1:
+					System.out.println("You won a "+door[0]);
+					break;
+				case 2:
+					System.out.println("You won a "+door[1]);
+					break;
+				case 3:
+					System.out.println("You won a "+door[2]);
+					break;
+					
+			}
+			}
+			
+			if (player.equals("ComputerSwitch")){
+				out.println("I'll swap my door ");
+				for( int i = 1; i<=3; i++){
+					if(i!=goatDoor && i!=doorNumber){
+						newDoorNumber = i;			
+					}
+				}
+				out.println("Swapped to door "+newDoorNumber);
+				switch (newDoorNumber) {
+				case 1:
+					System.out.println("You won a "+door[0]);
+					break;
+				case 2:
+					System.out.println("You won a "+door[1]);
+					break;
+				case 3:
+					System.out.println("You won a "+door[2]);
+					break;
+			}
+			}
+			
+			if(player.equals("ComputerRandom")){
+				
+					
+			do{	newDoorNumber = new Random().nextInt(3); 
+				newDoorNumber +=1;}while(newDoorNumber==goatDoor);
+			
+			System.out.println("I'll go for door "+newDoorNumber);
+			switch (newDoorNumber) {
+			case 1:
+				System.out.println("You won a "+door[0]);
+				break;
+			case 2:
+				System.out.println("You won a "+door[1]);
+				break;
+			case 3:
+				System.out.println("You won a "+door[2]);
+				break;
+			}
+			}		
+							
+	
+			
+			
+			
+	keyboard.close();
+			
+	}
+}
