@@ -1,0 +1,34 @@
+package com.ai.javalab;
+import java.util.Arrays;
+import java.util.Random;
+
+
+public class NationalLottery {
+
+	public static void main(String[] args) {
+	int[] numbers;
+	numbers = new int[6];
+	int bonusBall =0;
+		for(int ballNumber = 1; ballNumber<=7; ballNumber++){	
+			int randomNumber = new Random().nextInt(49) +1;
+		if (ballNumber!=7){
+		 
+		numbers[ballNumber-1] = randomNumber;
+
+	
+		}
+		
+		else{
+			bonusBall = randomNumber;
+			
+		}
+		
+		}
+		
+		
+		Arrays.sort(numbers);
+		System.out.print(Arrays.toString(numbers)+"and the bonus ball is: "+bonusBall);	
+	}
+	
+}
+
