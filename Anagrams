@@ -1,0 +1,49 @@
+package com.ai.javalab;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class CheckingForAnagrams {
+
+	public static void main(String[] args) {
+		System.out.println("Type the first phrase to be checked: ");
+		Scanner keyboard = new Scanner(System.in);
+		String phrase1 = keyboard.nextLine();
+		System.out.println("Type the second phrase to be checked");
+		String phrase2 = keyboard.nextLine();
+		int charNumber1 = phrase1.length();
+		int charNumber2 = phrase2.length();
+		String phrase1Letters ="";
+		String phrase2Letters ="";
+		char[] charArray1;
+		char[] charArray2;
+		for( int number = 0; number<=charNumber1 -1; number++){
+			char letter = phrase1.charAt(number);
+			if(Character.isLetter(letter)){
+			phrase1Letters = phrase1Letters+letter;
+			}
+		}
+		for( int number = 0; number<=charNumber2 -1; number++){
+			char letter = phrase2.charAt(number);
+			if(Character.isLetter(letter)){
+			phrase2Letters = phrase2Letters+letter;
+			}
+		}
+		phrase1Letters = phrase1Letters.toLowerCase();
+		phrase2Letters = phrase2Letters.toLowerCase();
+		charArray1 = phrase1Letters.toCharArray();
+		charArray2 = phrase2Letters.toCharArray();
+		Arrays.sort(charArray1);
+		Arrays.sort(charArray2);
+
+
+	System.out.println(Arrays.equals(charArray1, charArray2));
+		
+		
+		
+		keyboard.close();
+		
+	}
+	
+	}
+
