@@ -1,0 +1,27 @@
+package com.ai.javalab;
+import java.util.Scanner;
+
+public class StarWarsNameGenerator {
+
+	public static void main(String[] args) {
+		System.out.println("Type first, second and third letters of first name");
+		Scanner scan = new Scanner(System.in);
+		String s1 = scan.nextLine();
+		System.out.println("Type first and second letters of last name");
+		String s2 = scan.nextLine();
+		System.out.println("Type first and second letters of mother's maiden name");
+		String s3 = scan.nextLine();
+		System.out.println("Type first, second and third letters of city of birth");
+		String s4 = scan.nextLine();
+		
+		
+		System.out.println("Your starwars name is: "+s1+s2+" "+s3+s4);
+		
+		
+
+
+scan.close();
+
+	}
+
+}
