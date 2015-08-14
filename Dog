@@ -1,0 +1,46 @@
+
+public class Dog {
+	
+	private String name;
+	private int age;
+	private String aliveDead;
+	int health =10;
+	
+	
+	public void setName(String n){
+		name = n;
+	}
+	public String getName(){
+		return name;
+	}
+	public void setAge(int years){
+		age = years;
+	}
+	public int getAge(){
+		return age;
+	}
+	public void setAliveDead(String alive){
+		aliveDead = alive;
+	}
+	public String getAliveDead(){
+		return aliveDead;
+	}
+
+	public void bark(){
+		System.out.println("Woof woof");
+	}
+	public void walk(){
+		System.out.println("Let's go to the park");
+	}
+	public void eat(){ 
+		System.out.println("Mmmmmm");
+	}
+	public void sleep(){
+		System.out.println("Good night ZZZzzzzz");
+	}
+	public void play(){
+		System.out.println("Let's play fetch!");
+	}
+
+
+}
