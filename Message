@@ -1,0 +1,21 @@
+package PigLatin;
+/**
+ * message class to set message to be translated
+ * @author dallan
+ *
+ */
+
+public class Message {
+	private String text;
+	
+	public void setText(String text){
+		this.text = text;
+	}
+	public String getMessage(){
+		return text;
+	}
+
+	public void translate(){
+		
+}
+}
