@@ -1,0 +1,53 @@
+package restaurant;
+/**
+ * Method that is designed to allow user to update restaurant ordering
+ * system and save update to text file.
+ * Method also calculates bill for table.
+ * @author dallan
+ *
+ */
+
+import static java.lang.System.out;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.text.NumberFormat;
+import java.util.Arrays;
+import java.util.Currency;
+import java.util.Scanner;
+
+public class Order {
+	private int starter;
+	private int main;
+	private int desert;
+	private double total;
+	public int getStarter() {
+		return starter;
+	}
+	public void setStarter(int starter) {
+		this.starter = starter;
+	}
+	public int getMain() {
+		return main;
+	}
+	public void setMain(int main) {
+		this.main = main;
+	}
+	public int getDesert() {
+		return desert;
+	}
+	public void setDesert(int desert) {
+		this.desert = desert;
+	}
+	
+	public void getBill(){
+		NumberFormat numberFormatter = NumberFormat.getCurrencyInstance();
+		
+		total = (starter*6.00+main*12.00+desert*4.00);
+		System.out.println("The total bill is "+numberFormatter.format(total));
+	}
+
+	
+	}
+
