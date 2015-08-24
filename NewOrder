@@ -1,0 +1,72 @@
+package restaurant;
+
+/**
+ * Class to represent a new order, reading in the text file and
+ * handling user input via keyboard
+ * and updating text file
+ * @author dallan
+ *
+ */
+import static java.lang.System.out;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+import com.ai.javalab.Room;
+
+public class NewOrder {
+	public static void main(String args[]) throws IOException{
+		
+		ArrayList<String> myTableArray = new ArrayList<String>();
+		Scanner diskScanner =
+				new Scanner(new File("Order.txt"));
+		diskScanner.nextLine();
+		diskScanner.nextLine();
+					while (diskScanner.hasNextLine())
+				myTableArray.add(diskScanner.nextLine());
+				
+				diskScanner.close();
+	
+	Order tableOrder[];
+	tableOrder = new Order[5];
+	Scanner keyboard = new Scanner(System.in);
+			for (int tableNum = 0; tableNum < 5; tableNum++) {
+			tableOrder[tableNum] = new Order();}
+			int tableNumber = 0;
+			System.out.println("Choose table number");
+			tableNumber = keyboard.nextInt();
+			System.out.println("Number of starters"); ;
+			tableOrder[tableNumber].setStarter(keyboard.nextInt());
+			System.out.println("Number of mains");
+			tableOrder[tableNumber].setMain(keyboard.nextInt());
+			System.out.println("Number of deserts");
+			tableOrder[tableNumber].setDesert(keyboard.nextInt());
+		
+			keyboard.close();
+
+			PrintStream listOut = 
+					new PrintStream ("Order.txt");
+			listOut.println("Table\tStarter\tMain\tDesert");
+		listOut.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t ");
+			myTableArray.remove(tableNumber);
+			String order = (" "+tableNumber+"\t"+tableOrder[tableNumber].getStarter()+"\t"+
+					tableOrder[tableNumber].getMain()+"\t"+tableOrder[tableNumber].getDesert());
+			myTableArray.add(tableNumber, order);
+			for (int table = 0; table<5; table++){	
+			listOut.println(myTableArray.get(table));	
+			}
+			listOut.close();
+			
+			tableOrder[tableNumber].getBill();
+			}
+
+}
+
+
+
+
