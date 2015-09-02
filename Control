@@ -1,0 +1,37 @@
+package control;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+
+import model.HangmanModel;
+import view.View;
+
+
+public class Control {
+	
+	private HangmanModel model;
+	private View view;
+	
+	
+	public Control (HangmanModel m, View v) throws IOException{
+		this.model = m;
+		this.view = v;
+		
+		view.bottomPanel.addQuitListener(new QuitListener());
+		view.update();
+	
+	}
+	
+	
+		class QuitListener implements ActionListener {
+			
+			public QuitListener(){}
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+			System.exit(0); 	
+			}		
+		}
+}
