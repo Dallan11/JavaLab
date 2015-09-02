@@ -1,0 +1,44 @@
+package model;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Words {
+	
+	String word;
+	String blank;
+	
+	public String generateWord() throws IOException{
+		
+		ArrayList<String> wordList = new ArrayList<String>();
+		Scanner aScanner = new Scanner (new File("HangmanWords.txt"));
+		while (aScanner.hasNext()){
+			wordList.add(aScanner.nextLine());
+		}
+		aScanner.close();
+		int random = new Random().nextInt(wordList.size());
+		word = wordList.get(random);
+		return word;
+	}
+	
+	public String hideWord(){
+		
+		StringBuilder blanks = new StringBuilder();
+		for(int i= 0; i<word.length(); i++){
+			blanks.append("_");
+		}
+		blank = blanks.toString();
+		return blank;
+		
+	}
+	
+	
+	
+
+}
+
+
