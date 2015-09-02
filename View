@@ -1,0 +1,68 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Observable;
+import java.util.Observer;
+
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import model.HangmanModel;
+
+
+public class View extends JFrame{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public BottomPanel bottomPanel;
+	public LeftPanel leftPanel;
+	public RightPanel rightPanel;
+	private HangmanModel m;
+	private String word;
+
+	public View(HangmanModel model) throws IOException{
+		this.m = model;
+	JLabel label = new JLabel("label");	
+	this.bottomPanel = new BottomPanel();
+	this.leftPanel = new LeftPanel();
+	this.rightPanel = new RightPanel();
+	
+	this.setTitle("Hangman");
+	this.setSize(400, 300);
+	this.setLocationRelativeTo(null);
+	this.addWindowListener(new WindowAdapter() {
+		public void windowClosing(WindowEvent e){
+			System.exit(0);
+		}
+	});
+	
+	
+	JPanel panel = new JPanel();
+	panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+	panel.add(bottomPanel);
+	this.getContentPane().add(panel,BorderLayout.SOUTH);
+	
+	this.getContentPane().add(rightPanel, BorderLayout.EAST);
+	leftPanel.updateInfo(m);
+	this.getContentPane().add(leftPanel, BorderLayout.WEST);
+	}
+	public void update() throws IOException{
+		leftPanel.updateInfo(m);
+		
+		
+		
+	}
+}
