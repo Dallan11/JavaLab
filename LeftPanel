@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -64,36 +65,43 @@ public class LeftPanel extends JPanel{
 }
 	
 	
-	public void updateInfo(HangmanModel model) throws IOException{
+	public void tryGuess(HangmanModel model) throws IOException{
 		
-		letters.setText(model.getLetters());
+		
+		String guessedLetter = guessEntry.getText();
+		if((guessedLetter.length()==1)&& (model.availableLetter(guessedLetter))){	
+		try { 
+			model.guessLetter(guessedLetter);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		guessEntry.setText("");
+		guessEntry.requestFocusInWindow();
+		if(model.hanged()){
+			JOptionPane.showMessageDialog(this, "Hanged! The word was \n"
+					+model.getCurrentWord());
+		}
+			else if(model.wordGuessed()){
+				JOptionPane.showMessageDialog(this, "You guessed the word!");
+			}
+		
+		}
+	}
+	public void updateInfo(HangmanModel model){
 		hiddenWord.setText(model.getBlanks());
+		letters.setText(model.getLetters());
 		wrongGuesses.setText(model.getWrongGuesses());
 		numGuesses.setText(model.getNumGuesses());
-		
 	}
-	public void addGuessListener(GuessListener a){
+	public void addGuessListener(ActionListener a){
 		guess.addActionListener(a);
 	}
 	
-	class GuessListener implements ActionListener{
-		public GuessListener(){}
-		@Override
-		public void actionPerformed(ActionEvent e){
-			String guessedLetter = guessEntry.getText();
-			if((guessedLetter.length()==1)&& (model.availableLetter(guessedLetter))){	
-			try { 
-				model.guessLetter(guessedLetter);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			repaint();
-			guessEntry.setText("");
+	
 			
 			
-		}
-	}
+			
 	
 	}
-}
