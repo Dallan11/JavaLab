@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 import model.HangmanModel;
 import view.View;
 
@@ -19,10 +21,27 @@ public class Control {
 		this.view = v;
 		
 		view.bottomPanel.addQuitListener(new QuitListener());
-		view.update();
-	
+		view.leftPanel.addGuessListener(new GuessListener());
+		view.repaint();
+		
 	}
 	
+	class GuessListener implements ActionListener{
+		public GuessListener(){}
+		
+		@Override
+		public void actionPerformed(ActionEvent e){
+			try {
+				view.leftPanel.tryGuess(model);
+				view.leftPanel.updateInfo(model);
+				view.leftPanel.repaint();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}
+	}
 	
 		class QuitListener implements ActionListener {
 			
