@@ -1,0 +1,118 @@
+package model;
+
+import java.awt.List;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import model.Words;
+
+public class HangmanModel {
+	
+	private int availableGuesses;
+	private int wrongGuesses;
+	public Words newWord;
+	private ArrayList<Character> letters;
+	private String currentWord;
+	private String blankWord;
+	private int guessesCount;
+	
+	public ArrayList<Character> alphabet(){
+		ArrayList<Character> letters = new ArrayList<Character>();
+		for(char c = 'a'; c<='z'; c++){
+			
+			letters.add(c);		
+			
+	}
+		
+		return letters;
+	}
+	public void initialise() throws IOException{
+		this.availableGuesses = 10;
+		this.wrongGuesses = 0;
+		this.guessesCount = 0;
+	this.newWord = new Words();	
+	this.currentWord = newWord.generateWord();
+	this.blankWord = newWord.hideWord();
+	this.letters = alphabet();
+	
+	}
+	
+	public String guessLetter(String guess) throws IOException{
+	
+//		Scanner keyboard = new Scanner(System.in);	
+//		String guess = keyboard.next();
+		StringBuilder builder = new StringBuilder(blankWord);
+		boolean correctGuess = false;
+		for (int i = 0; i<currentWord.length(); i++){
+			String subString = currentWord.substring(i, i+1);
+			if(subString.equals(guess)){
+				int temp = i;
+				builder.replace(temp, temp+1, guess);
+				blankWord = builder.toString();
+				correctGuess = true;
+			}
+			else{ blankWord = builder.toString();
+			}
+		}
+		guessesCount++;
+		
+		if(correctGuess == false){
+			System.out.println("Wrong guess");
+			wrongGuesses++;
+		}
+		Character c = guess.charAt(0);
+		letters.remove(c);
+			System.out.print(letters);
+		System.out.println("blank " +blankWord);
+	
+		return blankWord;
+		}
+	
+	
+	public boolean wordGuessed(){
+		boolean wordGuessed = true;
+		
+		for(int i = 0; wordGuessed && i< currentWord.length(); i++ ){
+			char c = blankWord.charAt(i);
+			if( c == '_'){
+				wordGuessed = false;
+			}
+		
+	}
+		return wordGuessed;
+	}
+	
+	public boolean hanged(){
+		return wrongGuesses>=availableGuesses;
+	}
+	
+	public boolean availableLetter(String letter){
+		Character c = letter.charAt(0);
+		return letters.contains(c);
+	}
+
+public String getCurrentWord(){
+	return currentWord;
+}
+
+public String getLetters() {
+   return letters.toString();
+        }
+    
+public String getBlanks(){
+	return blankWord;
+}
+
+public String getWrongGuesses(){
+	return Integer.toString(wrongGuesses);
+}
+public String getNumGuesses(){
+	return Integer.toString(guessesCount);
+}
+
+
+
+
+
+}
+
