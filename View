@@ -50,6 +50,7 @@ public class View extends JFrame{
 	});
 	
 	
+	
 	JPanel panel = new JPanel();
 	panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 	panel.add(bottomPanel);
@@ -60,9 +61,9 @@ public class View extends JFrame{
 	this.getContentPane().add(leftPanel, BorderLayout.WEST);
 	}
 	public void update() throws IOException{
+		leftPanel.tryGuess(m);
 		leftPanel.updateInfo(m);
-		
-		
+		leftPanel.repaint();
 		
 	}
 }
