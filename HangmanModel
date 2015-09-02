@@ -57,13 +57,13 @@ public class HangmanModel {
 		guessesCount++;
 		
 		if(correctGuess == false){
-			System.out.println("Wrong guess");
+		//	System.out.println("Wrong guess");
 			wrongGuesses++;
 		}
 		Character c = guess.charAt(0);
 		letters.remove(c);
-			System.out.print(letters);
-		System.out.println("blank " +blankWord);
+	//		System.out.print(letters);
+	//	System.out.println("blank " +blankWord);
 	
 		return blankWord;
 		}
