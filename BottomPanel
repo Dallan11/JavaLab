@@ -1,0 +1,33 @@
+package view;
+
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+public class BottomPanel extends JPanel {
+	JButton quit;
+	JButton newWord;
+	
+	
+	public BottomPanel(){
+		this.setLayout(new GridLayout(1,2));
+		this.quit = new JButton ("Quit");
+		this.newWord = new JButton("New Word");
+		
+		this.add(quit);
+		this.add(newWord);
+	}
+	
+	public void addQuitListener(ActionListener a){
+		if( this.quit == null )
+			System.out.println("BUTTON NULL");
+		this.quit.addActionListener(a);
+	}
+	public void addNewWordListener(ActionListener a){
+		if( newWord == null )
+			System.out.println("NULL");
+		newWord.addActionListener(a);
+	}
+}
