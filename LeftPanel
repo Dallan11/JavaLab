@@ -1,0 +1,99 @@
+package view;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import model.HangmanModel;
+
+public class LeftPanel extends JPanel{
+	private static final long serialVersionUID = 1L;
+	private HangmanModel model;
+	JButton guess;
+	JLabel letters;
+	JLabel wrongGuessesLabel;
+	JLabel wrongGuesses;
+	JLabel numGuessesLabel;
+	JLabel numGuesses;
+	JLabel hiddenWord;
+	private JTextField guessEntry;
+	static JLabel unguessedLettersTitle = new JLabel("Ungessed Letters");
+	
+
+	public LeftPanel() {
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+		
+		JPanel guessInfo = new JPanel();
+		guessInfo.setLayout(new BoxLayout(guessInfo, BoxLayout.Y_AXIS));
+		
+		unguessedLettersTitle.setHorizontalAlignment(JLabel.CENTER);
+		guessInfo.add(unguessedLettersTitle);
+		
+		this.letters = new JLabel();
+		this.letters.setHorizontalAlignment(JLabel.CENTER);
+		guessInfo.add(letters);
+		
+		guessEntry = new JTextField(10);
+		guessInfo.add(guessEntry);
+		
+		
+		guess = new JButton("Guess");
+		guessInfo.add(guess);
+		
+		hiddenWord = new JLabel();
+		guessInfo.add(hiddenWord);
+		
+		wrongGuessesLabel = new JLabel("Wrong guesses");
+		guessInfo.add(wrongGuessesLabel);
+		wrongGuesses = new JLabel();
+		guessInfo.add(wrongGuesses);
+
+		numGuessesLabel = new JLabel("Number of guesses");
+		guessInfo.add(numGuessesLabel);
+		numGuesses = new JLabel ();
+		guessInfo.add(numGuesses);
+		
+		this.add(guessInfo);
+}
+	
+	
+	public void updateInfo(HangmanModel model) throws IOException{
+		
+		letters.setText(model.getLetters());
+		hiddenWord.setText(model.getBlanks());
+		wrongGuesses.setText(model.getWrongGuesses());
+		numGuesses.setText(model.getNumGuesses());
+		
+	}
+	public void addGuessListener(GuessListener a){
+		guess.addActionListener(a);
+	}
+	
+	class GuessListener implements ActionListener{
+		public GuessListener(){}
+		@Override
+		public void actionPerformed(ActionEvent e){
+			String guessedLetter = guessEntry.getText();
+			if((guessedLetter.length()==1)&& (model.availableLetter(guessedLetter))){	
+			try { 
+				model.guessLetter(guessedLetter);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			repaint();
+			guessEntry.setText("");
+			
+			
+		}
+	}
+	
+	}
+}
